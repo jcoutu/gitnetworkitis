@@ -7,7 +7,6 @@ module GitNetworkitis
     def find_all_watched(options={})
       resp = self.class.get("/repos/watched/#{self.username}")
       json_result = JSON.parse(resp.body.to_s)
-
       result = Array.new
       json_result["repositories"].each do |repo|
         result.push parse_attributes(repo)
@@ -30,7 +29,8 @@ module GitNetworkitis
 
     def find(options={})
       resp = self.class.get("/repos/show/turingstudio/loupe")
-      parse_attributes(resp["repository"])
+      json_result = JSON.parse(resp.body.to_s)
+      parse_attributes(json_result["repository"])
     end
     
     private
