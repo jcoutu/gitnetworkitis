@@ -9,39 +9,29 @@ module GitNetworkitis
       json_result = JSON.parse(resp.body.to_s)
       result = Array.new
       json_result["repositories"].each do |repo|
-        result.push parse_attributes(repo)
+        result.push parse_attributes(repo, Repository.new(self.username, self.token))
       end
-      
+
       return result
     end
 
     def find_all_owned(options={})
       resp = self.class.get("/repos/show/#{self.username}")
       json_result = JSON.parse(resp.body.to_s)
-
       result = Array.new
       json_result["repositories"].each do |repo|
-        result.push parse_attributes(repo)
+        result.push parse_attributes(repo, Repository.new(self.username, self.token))
       end
-      
+
       return result
     end
 
     def find(options={})
-      resp = self.class.get("/repos/show/turingstudio/loupe")
-      json_result = JSON.parse(resp.body.to_s)
-      parse_attributes(json_result["repository"])
-    end
-    
-    private
-    
-    def parse_attributes(repo)
-      temp = Repository.new self.username, self.token
-      repo.each do |key, value|
-        method = "#{key}="
-        temp.send(method, value) if respond_to? method
+      if options.has_key?(:owner) & options.has_key?(:repo) 
+        resp = self.class.get("/repos/show/#{options[:owner]}/#{options[:repo]}")
+        json_result = JSON.parse(resp.body.to_s)
+        parse_attributes(json_result["repository"], Repository.new(self.username, self.token))
       end
-      temp
     end
   end
 end
