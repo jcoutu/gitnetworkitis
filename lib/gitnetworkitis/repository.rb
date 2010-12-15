@@ -11,7 +11,6 @@ module GitNetworkitis
       json_result["repositories"].each do |repo|
         result.push parse_attributes(repo, Repository.new(self.username, self.token))
       end
-
       return result
     end
 
@@ -22,7 +21,6 @@ module GitNetworkitis
       json_result["repositories"].each do |repo|
         result.push parse_attributes(repo, Repository.new(self.username, self.token))
       end
-
       return result
     end
 

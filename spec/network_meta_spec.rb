@@ -13,17 +13,41 @@ describe "Gitnetworkitis::NetworkMeta" do
       fake_responses
     end
 
-    it "should set the NetworkMeta's nethash" do
+    it "should set the nethash" do
       test = network_meta.find
       test.nethash.should == "e6598cce6fa0d71a266dce9ed0c053f0efa016ae"
     end
 
-    it "should set the NetworkMeta's date" do
+    it "should set the date array" do
       test = network_meta.find
       test.dates.should_not be_empty
       test.dates.first.should == "2010-10-08"
       test.dates.last.should == "2010-12-14"
     end
     
-  end
+    it "should set focus" do
+      test = network_meta.find
+      test.focus.should == 109
+    end
+    
+    it "should set the users array" do
+      test = network_meta.find
+      test.users.should_not == nil
+      test.users.length.should == 1
+      test.users[0]["repo"].should == "loupe"
+      test.users[0]["heads"].length.should == 3
+    end
+    
+    it "should set blocks" do
+      test = network_meta.find
+      test.blocks.should_not == nil
+      test.blocks.length.should == 1
+    end
+    
+    it "should set spacemap" do
+      test = network_meta.find
+      test.spacemap.should_not == nil
+      test.spacemap.length.should == 3
+    end
+  end  
 end
