@@ -17,7 +17,9 @@ module GitNetworkitis
     def parse_attributes(json, object)
       json.each do |key, value|
         method = "#{key}="
-        object.send(method, value) if respond_to? method
+        if object.respond_to? method
+          object.send(method, value) 
+        end
       end
       object
     end
