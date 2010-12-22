@@ -12,7 +12,6 @@ describe "Gitnetworkitis::NetworkData" do
 
     before :each do
       fake_responses
-      
     end
 
     it "should set the commits array" do
@@ -20,6 +19,5 @@ describe "Gitnetworkitis::NetworkData" do
       test.commits.first.parents.should be_empty
       test.commits.first.login.should == "stephenjudkins"
     end
-    
   end  
 end

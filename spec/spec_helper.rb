@@ -37,5 +37,6 @@ def fake_responses
     FakeWeb.register_uri(:get, "https://#{auth}github.com/api/v2/json/repos/show/turingstudio/loupe", :body => response_file('repos_show_turingstudio_loupe.json'))
     FakeWeb.register_uri(:get, "https://#{auth}github.com/turingstudio/loupe/network_meta", :body => response_file('turingstudio_loupe_network_meta.json'))
     FakeWeb.register_uri(:get, "https://#{auth}github.com/turingstudio/loupe/network_data_chunk?nethash=26fb01d365a6f7ea57be92299803cae7b95ae25a", :body => response_file('turingstudio_loupe_network_data.json'))
+    FakeWeb.register_uri(:get, "https://#{auth}github.com/api/v2/json/repos/show/turingstudio/loupe/branches", :body => response_file('repos_show_turingstudio_loupe_branches.json'))
   end
 end

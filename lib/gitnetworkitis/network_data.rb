@@ -12,7 +12,7 @@ module GitNetworkitis
         result = Array.new
         json_result["commits"].each do |commit|
           result.push parse_attributes(commit, Commit.new(self.username, self.token))
-        end
+        end 
         self.commits = result
         #This seems weird but what if later the api adds more data at this level? We could just return commits and change the name.
         return self

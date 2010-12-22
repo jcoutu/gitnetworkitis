@@ -6,5 +6,4 @@ describe "Gitnetworkitis::Commit" do
     fake_responses
   end
 
- 
 end

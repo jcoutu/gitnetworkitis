@@ -2,7 +2,7 @@ module GitNetworkitis
   class NetworkMeta < Base
     base_uri 'https://github.com/'
 
-    attr_accessor :spacemap, :blocks, :url, :nethash, :focus, :dates, :users, :heads
+    attr_accessor :spacemap, :blocks, :url, :nethash, :focus, :dates, :users, :branches
 
 
     def find(options={})
