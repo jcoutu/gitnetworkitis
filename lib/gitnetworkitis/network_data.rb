@@ -4,7 +4,6 @@ module GitNetworkitis
 
     attr_accessor :commits
 
-
     def find(options={})
       if options.has_key?(:owner) & options.has_key?(:repo) & options.has_key?(:nethash) 
         resp = self.class.get("/#{options[:owner]}/#{options[:repo]}/network_data_chunk?nethash=#{options[:nethash]}")
