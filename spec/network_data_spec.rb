@@ -7,8 +7,10 @@ describe "Gitnetworkitis::NetworkData" do
   end
 
   context "find" do
-    let(:network_meta){GitNetworkitis::NetworkData.new(@username, @token)}
-    let(:test){network_meta.find({:owner=>"turingstudio", :repo => "loupe", :nethash => "26fb01d365a6f7ea57be92299803cae7b95ae25a"})}
+    let(:tester){GitNetworkitis::NetworkMeta.new(@username, @token)}
+    let(:network_meta){tester.find({:owner=>"turingstudio", :repo => "loupe"})}
+    let(:network_data){GitNetworkitis::NetworkData.new(@username, @token)}
+    let(:test){network_data.find({:owner=>"turingstudio", :repo => "loupe", :network_meta => network_meta})}
 
     before :each do
       fake_responses
@@ -18,6 +20,10 @@ describe "Gitnetworkitis::NetworkData" do
       test.commits.should_not be_empty
       test.commits.first.parents.should be_empty
       test.commits.first.login.should == "stephenjudkins"
+    end
+    
+    it "should set the network_meta" do
+      test.network_meta.should == network_meta
     end
   end  
 end

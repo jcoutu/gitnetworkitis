@@ -29,7 +29,7 @@ end
 
 def fake_responses
   if @fake_web_requests
-    FakeWeb.allow_net_connect = false
+    FakeWeb.allow_net_connect = true
     FakeWeb.clean_registry
     auth = "#{@username}%2Ftoken:#{@token}@"
     FakeWeb.register_uri(:get, "https://#{auth}github.com/api/v2/json/repos/watched/jcoutu", :body => response_file('repos_watched_jcoutu.json'))
