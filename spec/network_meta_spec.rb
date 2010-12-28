@@ -40,7 +40,7 @@ describe "Gitnetworkitis::NetworkMeta" do
       test.spacemap.should_not == nil
       test.spacemap.length.should == 3
     end
-    
+
     it "should set branches to a collection of branches for a specific repo" do
       test.branches.should_not == nil
       test.branches.length.should == 3

@@ -21,7 +21,7 @@ describe "Gitnetworkitis::NetworkData" do
       test.commits.first.parents.should be_empty
       test.commits.first.login.should == "stephenjudkins"
     end
-    
+
     it "should set the network_meta" do
       test.network_meta.should == network_meta
     end
