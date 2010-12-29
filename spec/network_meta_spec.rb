@@ -11,17 +11,17 @@ describe "Gitnetworkitis::NetworkMeta" do
 
     it "should set the nethash" do
       test = network_meta.find({:owner=>"turingstudio", :repo => "loupe"})
-      test.nethash.should == "26fb01d365a6f7ea57be92299803cae7b95ae25a"
+      test.nethash.should == "068161e2c05a6b8029a7eb410dd27b1dfa531338"
     end
 
     it "should set the date array" do
       test.dates.should_not be_empty
       test.dates.first.should == "2010-10-08"
-      test.dates.last.should == "2010-12-15"
+      test.dates.last.should == "2010-12-28"
     end
 
     it "should set focus" do
-      test.focus.should == 109
+      test.focus.should == 133
     end
 
     it "should set the users array" do

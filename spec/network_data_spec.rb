@@ -19,7 +19,7 @@ describe "Gitnetworkitis::NetworkData" do
     it "should set the commits array" do
       test.commits.should_not be_empty
       test.commits.first.parents.should be_empty
-      test.commits.first.login.should == "stephenjudkins"
+      test.commits.length.should  == 134
     end
 
     it "should set the network_meta" do

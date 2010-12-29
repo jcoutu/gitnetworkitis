@@ -7,13 +7,23 @@ describe "Gitnetworkitis::Branch" do
   end
 
   context "find_all" do
-    let(:branches){GitNetworkitis::Branch.new(@username, @token)}
-    let(:test){branches.find_all({:owner=>"turingstudio", :repo => "loupe", :nethash => "26fb01d365a6f7ea57be92299803cae7b95ae25a"})}
+    let(:branch){GitNetworkitis::Branch.new(@username, @token)}
+    let(:test){branch.find_all({:owner=>"turingstudio", :repo => "loupe", :nethash => "068161e2c05a6b8029a7eb410dd27b1dfa531338"})}
 
     it "should return a collection of branches for a specific repo" do
       test.should_not be_empty
       test.first.name.should_not be_empty
       test.length.should == 3
     end
+  end
+  
+  context "commits" do
+    let(:branch){GitNetworkitis::Branch.new(@username, @token)}
+    let(:test){branch.find_all({:owner=>"turingstudio", :repo => "loupe", :nethash => "068161e2c05a6b8029a7eb410dd27b1dfa531338"})}
+
+    it "should return an array of commits for the branch" do
+      test[0].commits.should_not be_empty
+    end
+    
   end
 end

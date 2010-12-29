@@ -11,24 +11,13 @@ module GitNetworkitis
         json_result = JSON.parse(resp.body.to_s)
         result = Array.new
         json_result["commits"].each do |commit|
-          temp_commit = parse_attributes(commit, Commit.new(self.username, self.token, {:network_meta => self.network_meta}))
+          temp_commit = parse_attributes(commit, Commit.new(self.username, self.token))
           result.push temp_commit
         end 
-        self.commits = set_branch_names(result)
+        self.commits = result
         #This seems weird but what if later the api adds more data at this level? We could just return commits and change the name.
         return self
       end
-    end
-
-    def set_branch_names(commits)
-      result = Array.new
-      if !commits.empty?
-        commits.each do |current|
-          current.branch = self.network_meta.branches[current.space]
-          result.push current
-        end
-      end
-      return result
     end
 
   end
