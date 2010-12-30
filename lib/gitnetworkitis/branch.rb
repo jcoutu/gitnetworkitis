@@ -15,19 +15,26 @@ module GitNetworkitis
         return result
       end
     end
-    
+
     def commits
-      puts self.id
-      resp = self.class.get("/commits/list/#{self.owner}/#{self.repo}/#{self.id}?page=4")
-      json_result = JSON.parse(resp.body.to_s)
+      pages = true
+      counter = 0
       result = Array.new
-      json_result["commits"].each do |commit|
-        temp_commit = parse_attributes(commit, Commit.new(self.username, self.token))
-        result.push temp_commit
+      while pages do
+        resp = self.class.get("/commits/list/#{self.owner}/#{self.repo}/#{self.id}?page=#{counter}")
+        json_result = JSON.parse(resp.body.to_s)
+        if !json_result.has_key?("error")
+          json_result["commits"].each do |commit|
+            temp_commit = parse_attributes(commit, Commit.new(self.username, self.token))
+            result.push temp_commit
+          end
+        else
+          pages = false
+        end
+        counter = counter+1
       end
-      puts result.length
       result
     end
-    
+
   end
 end
