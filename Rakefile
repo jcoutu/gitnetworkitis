@@ -15,9 +15,9 @@ Jeweler::Tasks.new do |gem|
   gem.name = "gitnetworkitis"
   gem.homepage = "http://github.com/jcoutu/gitnetworkitis"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
-  gem.email = "jcoutu@Julian-Coutus-MacBook-Pro"
+  gem.summary = "Git API Gem utilizing the Network API"
+  gem.description = "Git API Gem utilizing the Network API"
+  gem.email = "jcoutu@phaseiiicreations.com"
   gem.authors = ["Julian Coutu"]
   # Include your dependencies below. Runtime dependencies are required when using your gem,
   # and development dependencies are only needed for development (ie running rake tasks, tests, etc)
