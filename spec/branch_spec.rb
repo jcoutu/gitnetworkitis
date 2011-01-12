@@ -22,7 +22,6 @@ describe "Gitnetworkitis::Branch" do
     let(:test){branch.find_all({:owner=>"turingstudio", :repo => "loupe", :nethash => "068161e2c05a6b8029a7eb410dd27b1dfa531338"})}
 
     it "should return an array of commits for the branch" do
-      test[0].commits.should_not be_empty
       test[0].commits.length.should == 158
       test[1].commits.length.should == 140
       test[2].commits.length.should == 138

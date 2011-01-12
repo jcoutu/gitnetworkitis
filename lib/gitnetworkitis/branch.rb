@@ -4,6 +4,7 @@ module GitNetworkitis
 
     attr_accessor :name, :id, :owner, :repo
 
+    #Retrieves all branches based on a specific repo.
     def find_all(options={})
       if options.has_key?(:owner) & options.has_key?(:repo) 
         resp = self.class.get("/repos/show/#{options[:owner]}/#{options[:repo]}/branches")
@@ -16,6 +17,8 @@ module GitNetworkitis
       end
     end
 
+
+    #Loops pages and returns all commits specific to a branch
     def commits
       pages = true
       counter = 0
