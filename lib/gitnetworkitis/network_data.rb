@@ -7,7 +7,7 @@ module GitNetworkitis
     def find(options={})
       if options.has_key?(:owner) & options.has_key?(:repo) & options.has_key?(:network_meta) 
         self.network_meta = options[:network_meta]
-        resp = self.class.get("/#{options[:owner]}/#{options[:repo]}/network_data_chunk?nethash=#{self.network_meta.nethash}")
+        resp = self.class.get("/#{options[:owner]}/#{options[:repo]}/network_data_chunk?nethash=#{self.network_meta.nethash}&start=0&end=#{self.network_meta.focus}")
         json_result = JSON.parse(resp.body.to_s)
         result = Array.new
         json_result["commits"].each do |commit|
