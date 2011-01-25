@@ -56,6 +56,7 @@ def fake_responses
     FakeWeb.register_uri(:get, "https://#{auth}github.com/api/v2/json/commits/list/turingstudio/loupe/c3aeb61e37f94bbb67c4f14b52c23b8e54d30d0e?page=2", :body => response_file('turingstudio_loupe_c3aeb61e37f94bbb67c4f14b52c23b8e54d30d0e?page=2.json'))
     FakeWeb.register_uri(:get, "https://#{auth}github.com/api/v2/json/commits/list/turingstudio/loupe/c3aeb61e37f94bbb67c4f14b52c23b8e54d30d0e?page=3", :body => response_file('turingstudio_loupe_c3aeb61e37f94bbb67c4f14b52c23b8e54d30d0e?page=3.json'))
     FakeWeb.register_uri(:get, "https://#{auth}github.com/api/v2/json/commits/list/turingstudio/loupe/c3aeb61e37f94bbb67c4f14b52c23b8e54d30d0e?page=4", :body => response_file('turingstudio_loupe_c3aeb61e37f94bbb67c4f14b52c23b8e54d30d0e?page=4.json'))
-    
+    FakeWeb.register_uri(:get, "https://#{auth}github.com/turingstudio/loupe/network_data_chunk?nethash=068161e2c05a6b8029a7eb410dd27b1dfa531338&start=130&end=133", :body => response_file('turingstudio_loupe_068161e2c05a6b8029a7eb410dd27b1dfa531338?start=130.json'))
+    FakeWeb.register_uri(:get, "https://#{auth}github.com/turingstudio/loupe/network_data_chunk?nethash=068161e2c05a6b8029a7eb410dd27b1dfa531338&start=1&end=5", :body => response_file('turingstudio_loupe_068161e2c05a6b8029a7eb410dd27b1dfa531338?start=1&end=5.json'))
   end
 end
