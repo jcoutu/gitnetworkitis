@@ -60,6 +60,7 @@ describe "Gitnetworkitis::NetworkData" do
 
     it "should set the commits array" do
       test.commits.should_not be_empty
+      test.commits.first.parents.should_not be_empty
       test.commits.length.should  == 5
     end
 
@@ -67,4 +68,19 @@ describe "Gitnetworkitis::NetworkData" do
       test.network_meta.should == network_meta
     end
   end
+  
+  context "find with no owner or repo" do
+    let(:tester){GitNetworkitis::NetworkMeta.new(@username, @token)}
+    let(:network_meta){tester.find({:owner=>"turingstudio", :repo => "loupe"})}
+    let(:network_data){GitNetworkitis::NetworkData.new(@username, @token)}
+
+    before :each do
+      fake_responses
+    end
+
+    it "should raise exception" do
+      lambda {network_data.find({:network_meta => network_meta, :start => 1, :end => 5})}.should raise_error
+    end
+  end
+  
 end
