@@ -19,18 +19,21 @@ module GitNetworkitis
     end
 
     def find_all(options={})
+      #Make this loop through pages so we dont' return huge results in one json calls
       self.network_meta = options[:network_meta]
       resp = self.class.get("/#{options[:owner]}/#{options[:repo]}/network_data_chunk?nethash=#{self.network_meta.nethash}&start=0&end=#{self.network_meta.focus}")
       return parse_results(resp)
     end
 
     def find_since(options={})
+      #Make this loop through pages so we dont' return huge results in one json calls
       self.network_meta = options[:network_meta]
       resp = self.class.get("/#{options[:owner]}/#{options[:repo]}/network_data_chunk?nethash=#{self.network_meta.nethash}&start=#{options[:start]}&end=#{self.network_meta.focus}")
       return parse_results(resp)
     end
 
     def find_range(options={})
+      #Make this loop through pages so we dont' return huge results in one json calls
       self.network_meta = options[:network_meta]
       resp = self.class.get("/#{options[:owner]}/#{options[:repo]}/network_data_chunk?nethash=#{self.network_meta.nethash}&start=#{options[:start]}&end=#{options[:end]}")
       return parse_results(resp)
