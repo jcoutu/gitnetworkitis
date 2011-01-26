@@ -4,7 +4,7 @@ module GitNetworkitis
 
     attr_accessor :description, :has_wiki, :url, :forks, :open_issues, :forks, :name, :homepage, :watchers, :owner, :private, :pledgie, :size, :has_downloads
 
-    def find_all_watched(options={})
+    def find_all_watched
       resp = self.class.get("/repos/watched/#{self.username}")
       json_result = JSON.parse(resp.body.to_s)
       result = Array.new
@@ -14,7 +14,7 @@ module GitNetworkitis
       return result
     end
 
-    def find_all_owned(options={})
+    def find_all_owned
       resp = self.class.get("/repos/show/#{self.username}")
       json_result = JSON.parse(resp.body.to_s)
       result = Array.new
