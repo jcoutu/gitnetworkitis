@@ -44,7 +44,7 @@ module GitNetworkitis
         result.push temp_commit
       end 
       self.commits = result
-      return self      
+      return self
     end
   end
 end
