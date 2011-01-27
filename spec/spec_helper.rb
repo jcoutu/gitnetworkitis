@@ -46,7 +46,17 @@ def fake_responses
     #Girl-Ambition Responses
     FakeWeb.register_uri(:get, "https://#{auth}github.com/turingstudio/website-girlambition/network_meta", :body => response_file('girlambition/turingstudio_website-girlambition_network_meta.json'))
     FakeWeb.register_uri(:get, "https://#{auth}github.com/api/v2/json/repos/show/turingstudio/website-girlambition/branches", :body => response_file('girlambition/repos_show_turingstudio_website-girlambition_branches.json'))
-    
+    FakeWeb.register_uri(:get, "https://#{auth}github.com/turingstudio/website-girlambition/network_data_chunk?nethash=0ead14b395f02f065083a6865dd06ede8b3153bc&start=0&end=500", :body => response_file('girlambition/0-500.json'), :content_length => 1)
+    FakeWeb.register_uri(:get, "https://#{auth}github.com/turingstudio/website-girlambition/network_data_chunk?nethash=0ead14b395f02f065083a6865dd06ede8b3153bc&start=501&end=1001", :body => response_file('girlambition/501-1001.json'), :content_length => 1)
+    FakeWeb.register_uri(:get, "https://#{auth}github.com/turingstudio/website-girlambition/network_data_chunk?nethash=0ead14b395f02f065083a6865dd06ede8b3153bc&start=1002&end=1502", :body => response_file('girlambition/1002-1502.json'), :content_length => 1)
+    FakeWeb.register_uri(:get, "https://#{auth}github.com/turingstudio/website-girlambition/network_data_chunk?nethash=0ead14b395f02f065083a6865dd06ede8b3153bc&start=1503&end=2003", :body => response_file('girlambition/1503-2003.json'), :content_length => 1)
+    FakeWeb.register_uri(:get, "https://#{auth}github.com/turingstudio/website-girlambition/network_data_chunk?nethash=0ead14b395f02f065083a6865dd06ede8b3153bc&start=2004&end=2504", :body => response_file('girlambition/2004-2504.json'), :content_length => 1)
+    FakeWeb.register_uri(:get, "https://#{auth}github.com/turingstudio/website-girlambition/network_data_chunk?nethash=0ead14b395f02f065083a6865dd06ede8b3153bc&start=2505&end=3005", :body => response_file('girlambition/2505-3005.json'), :content_length => 1)
+    FakeWeb.register_uri(:get, "https://#{auth}github.com/turingstudio/website-girlambition/network_data_chunk?nethash=0ead14b395f02f065083a6865dd06ede8b3153bc&start=3006&end=3506", :body => response_file('girlambition/3006-3506.json'), :content_length => 1)
+    FakeWeb.register_uri(:get, "https://#{auth}github.com/turingstudio/website-girlambition/network_data_chunk?nethash=0ead14b395f02f065083a6865dd06ede8b3153bc&start=3507&end=4007", :body => response_file('girlambition/3507-4007.json'), :content_length => 1)
+    FakeWeb.register_uri(:get, "https://#{auth}github.com/turingstudio/website-girlambition/network_data_chunk?nethash=0ead14b395f02f065083a6865dd06ede8b3153bc&start=4008&end=4508", :body => response_file('girlambition/4008-4508.json'), :content_length => 1)
+    FakeWeb.register_uri(:get, "https://#{auth}github.com/turingstudio/website-girlambition/network_data_chunk?nethash=0ead14b395f02f065083a6865dd06ede8b3153bc&start=4509&end=4999", :body => response_file('girlambition/4509-4999.json'), :content_length => 1)
+
     #This needs to be refactored. It's dumb to do this!
     FakeWeb.register_uri(:get, "https://#{auth}github.com/api/v2/json/commits/list/turingstudio/loupe/51ac36280d2dfe16c37b66ef344859c9c714c8e1?page=0", :body => response_file('branch_pages/turingstudio_loupe_51ac36280d2dfe16c37b66ef344859c9c714c8e1?page=0.json'))
     FakeWeb.register_uri(:get, "https://#{auth}github.com/api/v2/json/commits/list/turingstudio/loupe/51ac36280d2dfe16c37b66ef344859c9c714c8e1?page=1", :body => response_file('branch_pages/turingstudio_loupe_51ac36280d2dfe16c37b66ef344859c9c714c8e1?page=1.json'))

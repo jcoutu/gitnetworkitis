@@ -85,7 +85,6 @@ describe "Gitnetworkitis::NetworkData" do
   
   
   context "find on repo with large amount of commits" do
-    pending
     let(:tester){GitNetworkitis::NetworkMeta.new(@username, @token)}
     let(:network_meta){tester.find({:owner=>"turingstudio", :repo => "website-girlambition"})}
     let(:network_data){GitNetworkitis::NetworkData.new(@username, @token)}
@@ -96,10 +95,9 @@ describe "Gitnetworkitis::NetworkData" do
     end
 
     it "should set the commits array" do
-      pending
       test.commits.should_not be_empty
       test.commits.first.parents.should be_empty
-      test.commits.length.should  == 4999
+      test.commits.length.should  == 5000
     end
   end
   

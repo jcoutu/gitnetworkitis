@@ -23,5 +23,11 @@ module GitNetworkitis
       end
       object
     end
+    
+    #This is for parsing bad json returned from github
+    def escape_json(json)
+      json.gsub(/(....\[31m)./, '')
+    end
+    
   end
 end
