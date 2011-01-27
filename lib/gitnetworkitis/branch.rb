@@ -38,6 +38,5 @@ module GitNetworkitis
       end
       result
     end
-
   end
 end
