@@ -43,5 +43,14 @@ describe "Gitnetworkitis::Repository" do
       repo.owner.should == "turingstudio"
     end
   end
+  
+  context "#remote_id" do
+    it "should set the remote_id to owner/name" do
+      c = GitNetworkitis::Repository.new(@username, @token)
+      repo = c.find({:owner=>"turingstudio", :repo => "loupe"}) 
+      repo.remote_id.should == "turingstudio/loupe"
+    end
+    
+  end
 
 end

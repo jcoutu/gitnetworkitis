@@ -37,5 +37,9 @@ module GitNetworkitis
       end
     end
 
+    def remote_id
+        return "#{self.owner}/#{self.name}"
+    end
+
   end
 end
