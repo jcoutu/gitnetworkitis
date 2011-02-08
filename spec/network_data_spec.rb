@@ -69,7 +69,7 @@ describe "Gitnetworkitis::NetworkData" do
     end
   end
   
-  context "find with no owner or repo" do
+  context "find with missing aurgument" do
     let(:tester){GitNetworkitis::NetworkMeta.new(@username, @token)}
     let(:network_meta){tester.find({:owner=>"turingstudio", :repo => "loupe"})}
     let(:network_data){GitNetworkitis::NetworkData.new(@username, @token)}
@@ -78,8 +78,20 @@ describe "Gitnetworkitis::NetworkData" do
       fake_responses
     end
 
-    it "should raise exception" do
-      lambda {network_data.find({:network_meta => network_meta, :start => 1, :end => 5})}.should raise_error
+    it "should raise exception if missing owner, repo, and Gitnetworkitis:NetworkMeta" do
+      lambda {network_data.find({:start => 1, :end => 5})}.should raise_error "You must provide an Owner, Repo and Gitnetworkitis:NetworkMeta"
+    end
+
+    it "should raise exception if Gitnetworkitis:NetworkMeta" do
+      lambda {network_data.find({:owner=>"turingstudio", :repo => "loupe", :start => 1, :end => 5})}.should raise_error "You must provide an Owner, Repo and Gitnetworkitis:NetworkMeta"
+    end
+
+    it "should raise exception if missing owner" do
+      lambda {network_data.find({:repo => "loupe", :network_meta => network_meta, :start => 1, :end => 5})}.should raise_error "You must provide an Owner, Repo and Gitnetworkitis:NetworkMeta"
+    end
+
+    it "should raise exception if missing repo" do
+      lambda {network_data.find({:owner=>"turingstudio", :network_meta => network_meta, :start => 1, :end => 5})}.should raise_error "You must provide an Owner, Repo and Gitnetworkitis:NetworkMeta"
     end
   end
   

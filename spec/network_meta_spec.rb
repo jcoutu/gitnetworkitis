@@ -45,5 +45,15 @@ describe "Gitnetworkitis::NetworkMeta" do
       test.branches.should_not == nil
       test.branches.length.should == 3
     end
+    
+    context "error returns" do
+      
+      it "raise an exception when the repo is not found" do
+        lambda {network_meta.find({:owner=>"bad_owner", :repo => "bad_repo"})}.should raise_error "Unable to find Github Repository"
+      end
+      
+      
+      
+    end
   end  
 end

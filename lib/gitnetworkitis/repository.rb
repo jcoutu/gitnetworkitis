@@ -7,8 +7,8 @@ module GitNetworkitis
     def find_all_watched
       result = Array.new
       unless !self.username && !self.token
-        resp = self.class.get("/repos/watched/#{self.username}")
-        json_result = JSON.parse(resp.body.to_s)
+        resp = get("/repos/watched/#{self.username}")
+        json_result = self.parse_json(resp.body.to_s)
         json_result["repositories"].each do |repo|
           result.push parse_attributes(repo, Repository.new(self.username, self.token))
         end
@@ -19,8 +19,8 @@ module GitNetworkitis
     def find_all_owned
       result = Array.new
       unless !self.username && !self.token
-        resp = self.class.get("/repos/show/#{self.username}")
-        json_result = JSON.parse(resp.body.to_s)
+        resp = get("/repos/show/#{self.username}")
+        json_result = parse_json(resp.body.to_s)
         json_result["repositories"].each do |repo|
           result.push parse_attributes(repo, Repository.new(self.username, self.token))
         end
@@ -31,8 +31,8 @@ module GitNetworkitis
     def find(options={})
       result = Array.new
       if options.has_key?(:owner) & options.has_key?(:repo) 
-        resp = self.class.get("/repos/show/#{options[:owner]}/#{options[:repo]}")
-        json_result = JSON.parse(resp.body.to_s)
+        resp = get("/repos/show/#{options[:owner]}/#{options[:repo]}")
+        json_result = parse_json(resp.body.to_s)
         parse_attributes(json_result["repository"], Repository.new(self.username, self.token))
       end
     end

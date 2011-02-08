@@ -12,8 +12,26 @@ module GitNetworkitis
         self.send(method, value) if respond_to? method
       end
     end
-    private
 
+    def get url
+      ret = self.class.get(url)
+      if ret.response.code == "200"
+        return ret
+      else
+        raise "Unable to find Github Repository"
+      end
+    end
+
+    def parse_json json
+      begin
+        return JSON.parse(escape_json(json))
+      rescue => e
+        raise "Unable to parse JSON result" #{e.message}
+      end
+    end
+
+
+    private
     def parse_attributes(json, object)
       json.each do |key, value|
         method = "#{key}="
@@ -23,11 +41,11 @@ module GitNetworkitis
       end
       object
     end
-    
+
     #This is for parsing bad json returned from github
     def escape_json(json)
       json.gsub(/(....\[31m)./, '')
+      end
+
     end
-    
   end
-end

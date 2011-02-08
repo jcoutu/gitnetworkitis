@@ -37,13 +37,13 @@ module GitNetworkitis
       current_end = options[:end]
       while (options[:end] - current_start) > 500 do
         current_end = current_start + 500
-        resp = self.class.get("/#{options[:owner]}/#{options[:repo]}/network_data_chunk?nethash=#{self.network_meta.nethash}&start=#{current_start}&end=#{current_end}")
+        resp = get("/#{options[:owner]}/#{options[:repo]}/network_data_chunk?nethash=#{self.network_meta.nethash}&start=#{current_start}&end=#{current_end}")
         if resp.content_length > 0
           parse_results(resp)
         end
         current_start = current_start + 501
       end
-      resp = self.class.get("/#{options[:owner]}/#{options[:repo]}/network_data_chunk?nethash=#{self.network_meta.nethash}&start=#{current_start}&end=#{options[:end]}")
+      resp = self.get("/#{options[:owner]}/#{options[:repo]}/network_data_chunk?nethash=#{self.network_meta.nethash}&start=#{current_start}&end=#{options[:end]}")
       parse_results(resp)      
       
       return self
@@ -51,15 +51,11 @@ module GitNetworkitis
 
     private
     def parse_results(response)
-      begin
-        json_result = JSON.load(escape_json(response.body.to_s))
+        json_result = parse_json(escape_json(response.body.to_s))
         result = Array.new
         json_result["commits"].each do |commit|
           self.commits.push(parse_attributes(commit, Commit.new(self.username, self.token)))
         end 
-      rescue => e
-        puts "Now there's some ugly JSON! #{e.message}"
-      end
     end
         
   end
