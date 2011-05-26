@@ -48,6 +48,25 @@ describe "Gitnetworkitis::NetworkData" do
     end
   end
   
+  context "find with start set greater than end" do
+    let(:tester){GitNetworkitis::NetworkMeta.new(@username, @token)}
+    let(:network_meta){tester.find({:owner=>"turingstudio", :repo => "loupe"})}
+    let(:network_data){GitNetworkitis::NetworkData.new(@username, @token)}
+    let(:test){network_data.find({:owner=>"turingstudio", :repo => "loupe", :network_meta => network_meta, :start => 130, :end => 1})}
+
+    before :each do
+      fake_responses
+    end
+
+    it "should set the commits array" do
+      test.commits.should be_empty
+    end
+
+    it "should set the network_meta" do
+      test.network_meta.should == network_meta
+    end
+  end
+  
   context "find with start and end set" do
     let(:tester){GitNetworkitis::NetworkMeta.new(@username, @token)}
     let(:network_meta){tester.find({:owner=>"turingstudio", :repo => "loupe"})}

@@ -51,11 +51,15 @@ module GitNetworkitis
 
     private
     def parse_results(response)
+      begin
         json_result = parse_json(escape_json(response.body.to_s))
         result = Array.new
         json_result["commits"].each do |commit|
           self.commits.push(parse_attributes(commit, Commit.new(self.username, self.token)))
         end 
+      rescue
+        self.commits = []
+      end
     end
         
   end

@@ -16,70 +16,12 @@ Gem::Specification.new do |s|
     "LICENSE.txt",
     "README.rdoc"
   ]
-  s.files = [
-    ".document",
-    ".rspec",
-    ".rvmrc",
-    "Gemfile",
-    "Gemfile.lock",
-    "LICENSE.txt",
-    "README.rdoc",
-    "Rakefile",
-    "VERSION",
-    "lib/gitnetworkitis.rb",
-    "lib/gitnetworkitis/base.rb",
-    "lib/gitnetworkitis/branch.rb",
-    "lib/gitnetworkitis/commit.rb",
-    "lib/gitnetworkitis/network_data.rb",
-    "lib/gitnetworkitis/network_meta.rb",
-    "lib/gitnetworkitis/repository.rb",
-    "spec/base.rb",
-    "spec/branch_spec.rb",
-    "spec/commit_spec.rb",
-    "spec/gitnetworkitis_spec.rb",
-    "spec/network_data_spec.rb",
-    "spec/network_meta_spec.rb",
-    "spec/repository_spec.rb",
-    "spec/responses/repos_show_jcoutu.json",
-    "spec/responses/repos_show_turingstudio_loupe.json",
-    "spec/responses/repos_show_turingstudio_loupe_branches.json",
-    "spec/responses/repos_watched_jcoutu.json",
-    "spec/responses/turingstudio_loupe_51ac36280d2dfe16c37b66ef344859c9c714c8e1?page=0.json",
-    "spec/responses/turingstudio_loupe_51ac36280d2dfe16c37b66ef344859c9c714c8e1?page=1.json",
-    "spec/responses/turingstudio_loupe_51ac36280d2dfe16c37b66ef344859c9c714c8e1?page=2.json",
-    "spec/responses/turingstudio_loupe_51ac36280d2dfe16c37b66ef344859c9c714c8e1?page=3.json",
-    "spec/responses/turingstudio_loupe_51ac36280d2dfe16c37b66ef344859c9c714c8e1?page=4.json",
-    "spec/responses/turingstudio_loupe_51ac36280d2dfe16c37b66ef344859c9c714c8e1?page=5.json",
-    "spec/responses/turingstudio_loupe_bec7b23dc57b14d89fa2829e8c32a108a18e7248?page=0.json",
-    "spec/responses/turingstudio_loupe_bec7b23dc57b14d89fa2829e8c32a108a18e7248?page=1.json",
-    "spec/responses/turingstudio_loupe_bec7b23dc57b14d89fa2829e8c32a108a18e7248?page=2.json",
-    "spec/responses/turingstudio_loupe_bec7b23dc57b14d89fa2829e8c32a108a18e7248?page=3.json",
-    "spec/responses/turingstudio_loupe_bec7b23dc57b14d89fa2829e8c32a108a18e7248?page=4.json",
-    "spec/responses/turingstudio_loupe_branch.json",
-    "spec/responses/turingstudio_loupe_c3aeb61e37f94bbb67c4f14b52c23b8e54d30d0e?page=0.json",
-    "spec/responses/turingstudio_loupe_c3aeb61e37f94bbb67c4f14b52c23b8e54d30d0e?page=1.json",
-    "spec/responses/turingstudio_loupe_c3aeb61e37f94bbb67c4f14b52c23b8e54d30d0e?page=2.json",
-    "spec/responses/turingstudio_loupe_c3aeb61e37f94bbb67c4f14b52c23b8e54d30d0e?page=3.json",
-    "spec/responses/turingstudio_loupe_c3aeb61e37f94bbb67c4f14b52c23b8e54d30d0e?page=4.json",
-    "spec/responses/turingstudio_loupe_network_data.json",
-    "spec/responses/turingstudio_loupe_network_meta.json",
-    "spec/spec_helper.rb"
-  ]
+  s.files = Dir['lib/**/*']
   s.homepage = %q{http://github.com/jcoutu/gitnetworkitis}
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{Git API Gem utilizing the Network API}
-  s.test_files = [
-    "spec/base.rb",
-    "spec/branch_spec.rb",
-    "spec/commit_spec.rb",
-    "spec/gitnetworkitis_spec.rb",
-    "spec/network_data_spec.rb",
-    "spec/network_meta_spec.rb",
-    "spec/repository_spec.rb",
-    "spec/spec_helper.rb"
-  ]
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
