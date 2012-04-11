@@ -1,0 +1,2 @@
+access_token: Oauth 2 access token
+test_repos: ["this repo name", "that repo name"]

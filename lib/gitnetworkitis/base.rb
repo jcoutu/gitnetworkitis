@@ -1,12 +1,11 @@
 module GitNetworkitis
   class Base
     include HTTParty
-    attr_accessor :username, :token
+    attr_accessor :token
 
-    def initialize(username, token, options={})
-      @username = username
+    # token is an oauth2 token
+    def initialize(token, options={})
       @token = token
-      self.class.basic_auth "#{username}/token", token
       options.each do |key, value|
         method = "#{key}="
         self.send(method, value) if respond_to? method
@@ -14,7 +13,7 @@ module GitNetworkitis
     end
 
     def get url
-      ret = self.class.get(url)
+      ret = self.class.get(url, query: {access_token: token})
       if ret.response.code == "200"
         return ret
       else
@@ -36,7 +35,7 @@ module GitNetworkitis
       json.each do |key, value|
         method = "#{key}="
         if object.respond_to? method
-          object.send(method, value) 
+          object.send(method, value)
         end
       end
       object

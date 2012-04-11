@@ -1,0 +1,58 @@
+{
+    "http_interactions": [
+        {
+            "recorded_at": "Tue, 10 Apr 2012 23:59:01 GMT",
+            "request": {
+                "body": {
+                    "encoding": "US-ASCII",
+                    "string": ""
+                },
+                "headers": {
+                    "connection": [
+                        "close"
+                    ]
+                },
+                "method": "get",
+                "uri": "https://api.github.com/user/repos?access_token=bad%20creds"
+            },
+            "response": {
+                "body": {
+                    "encoding": "US-ASCII",
+                    "string": "{\"message\":\"Bad credentials\"}"
+                },
+                "headers": {
+                    "connection": [
+                        "close"
+                    ],
+                    "content-length": [
+                        "29"
+                    ],
+                    "content-type": [
+                        "application/json; charset=utf-8"
+                    ],
+                    "date": [
+                        "Tue, 10 Apr 2012 23:59:01 GMT"
+                    ],
+                    "etag": [
+                        "\"ca6a3702f840b6bff0bb1bca6be0337c\""
+                    ],
+                    "server": [
+                        "nginx/1.0.13"
+                    ],
+                    "status": [
+                        "401 Unauthorized"
+                    ],
+                    "www-authenticate": [
+                        "Basic realm=\"GitHub\""
+                    ]
+                },
+                "http_version": "1.1",
+                "status": {
+                    "code": 401,
+                    "message": "Unauthorized"
+                }
+            }
+        }
+    ],
+    "recorded_with": "VCR 2.0.1"
+}

@@ -1,44 +1,28 @@
 module GitNetworkitis
   class Repository < Base
-    base_uri 'https://github.com/api/v2/json/'
+    base_uri 'https://api.github.com/'
 
-    attr_accessor :description, :has_wiki, :url, :forks, :open_issues, :forks, :name, :homepage, :watchers, :owner, :private, :pledgie, :size, :has_downloads
+    attr_accessor :watchers, :homepage, :has_downloads, :forks, :url, :has_wiki, :size, :private
+    attr_accessor :owner, :name, :description, :open_issues
 
-    def find_all_watched
-      result = Array.new
-      unless !self.username && !self.token
-        resp = get("/repos/watched/#{self.username}")
-        json_result = self.parse_json(resp.body.to_s)
-        json_result["repositories"].each do |repo|
-          result.push parse_attributes(repo, Repository.new(self.username, self.token))
-        end
+    # :type defaults to :all if it isn't supplied as an option
+    def find_all(options={})
+      #TODO use options to handle the optional filter params that github v3 supports
+      resp = get("/user/repos")
+      parse_json(resp.body.to_s).inject([]) do |repos, repo|
+        repos << parse_attributes(repo, Repository.new(token))
       end
-      return result
-    end
-
-    def find_all_owned
-      result = Array.new
-      unless !self.username && !self.token
-        resp = get("/repos/show/#{self.username}")
-        json_result = parse_json(resp.body.to_s)
-        json_result["repositories"].each do |repo|
-          result.push parse_attributes(repo, Repository.new(self.username, self.token))
-        end
-      end
-      return result
     end
 
     def find(options={})
-      result = Array.new
-      if options.has_key?(:owner) & options.has_key?(:repo) 
-        resp = get("/repos/show/#{options[:owner]}/#{options[:repo]}")
-        json_result = parse_json(resp.body.to_s)
-        parse_attributes(json_result["repository"], Repository.new(self.username, self.token))
+      if options.has_key?(:owner) & options.has_key?(:repo)
+        resp = get("/repos/#{options[:owner]}/#{options[:repo]}")
+        parse_attributes(parse_json(resp.body.to_s), Repository.new(token))
       end
     end
 
     def remote_id
-        return "#{self.owner}/#{self.name}"
+      return "#{self.owner['login']}/#{self.name}"
     end
 
   end

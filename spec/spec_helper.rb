@@ -10,15 +10,12 @@ Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 
 RSpec.configure do |config|
   config.before(:each) {
-    #Github username
-    @username = "jcoutu"
-
-    #Github Toekn
-    @token = "0ea98987469a2ef1daee5d1e30b42fd8"
+    #Github OAuth 2 Access Token
+    github_config = YAML.load_file(File.join(File.dirname(__FILE__), "github_config.yml"))
+    @token, @test_repos = github_config['access_token'], github_config['test_repos']
 
     #This will tell the tests to use fakeweb responses or not. Removing this will mostly likely cause test failures
     @fake_web_requests = true
-    
   }
 end
 
