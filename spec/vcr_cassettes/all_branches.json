@@ -1,0 +1,67 @@
+{
+    "http_interactions": [
+        {
+            "recorded_at": "Wed, 11 Apr 2012 17:15:20 GMT",
+            "request": {
+                "body": {
+                    "encoding": "US-ASCII",
+                    "string": ""
+                },
+                "headers": {
+                    "connection": [
+                        "close"
+                    ]
+                },
+                "method": "get",
+                "uri": "https://api.github.com/repos/jcoutu/gitnetworkitis/branches?access_token=58b1341e500198e5aae723aa97e245840050781d"
+            },
+            "response": {
+                "body": {
+                    "encoding": "US-ASCII",
+                    "string": "[{\"commit\":{\"sha\":\"3d68c13854c8898f8817e2cc60757c41c72ec1de\",\"url\":\"https://api.github.com/repos/jcoutu/gitnetworkitis/commits/3d68c13854c8898f8817e2cc60757c41c72ec1de\"},\"name\":\"spec-branch-1\"},{\"commit\":{\"sha\":\"6809600539c207aa2515db635085fd2b10c0ff91\",\"url\":\"https://api.github.com/repos/jcoutu/gitnetworkitis/commits/6809600539c207aa2515db635085fd2b10c0ff91\"},\"name\":\"master\"},{\"commit\":{\"sha\":\"72c84bde00c67616390ba7b3af29a5c029a2c8f5\",\"url\":\"https://api.github.com/repos/jcoutu/gitnetworkitis/commits/72c84bde00c67616390ba7b3af29a5c029a2c8f5\"},\"name\":\"spec-branch-2\"},{\"commit\":{\"sha\":\"8e6f9227f646bfe17d296cf418f2ba5ccdca4b48\",\"url\":\"https://api.github.com/repos/jcoutu/gitnetworkitis/commits/8e6f9227f646bfe17d296cf418f2ba5ccdca4b48\"},\"name\":\"spec-branch-3\"},{\"commit\":{\"sha\":\"8e6f9227f646bfe17d296cf418f2ba5ccdca4b48\",\"url\":\"https://api.github.com/repos/jcoutu/gitnetworkitis/commits/8e6f9227f646bfe17d296cf418f2ba5ccdca4b48\"},\"name\":\"v3\"}]"
+                },
+                "headers": {
+                    "connection": [
+                        "close"
+                    ],
+                    "content-length": [
+                        "948"
+                    ],
+                    "content-type": [
+                        "application/json; charset=utf-8"
+                    ],
+                    "date": [
+                        "Wed, 11 Apr 2012 17:15:20 GMT"
+                    ],
+                    "etag": [
+                        "\"b500dd72fde7bd98a71dcbc98da2d22f\""
+                    ],
+                    "server": [
+                        "nginx/1.0.13"
+                    ],
+                    "status": [
+                        "200 OK"
+                    ],
+                    "x-accepted-oauth-scopes": [
+                        "repo"
+                    ],
+                    "x-oauth-scopes": [
+                        ""
+                    ],
+                    "x-ratelimit-limit": [
+                        "5000"
+                    ],
+                    "x-ratelimit-remaining": [
+                        "4999"
+                    ]
+                },
+                "http_version": "1.1",
+                "status": {
+                    "code": 200,
+                    "message": "OK"
+                }
+            }
+        }
+    ],
+    "recorded_with": "VCR 2.0.1"
+}

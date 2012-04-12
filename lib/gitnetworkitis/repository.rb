@@ -5,9 +5,8 @@ module GitNetworkitis
     attr_accessor :watchers, :homepage, :has_downloads, :forks, :url, :has_wiki, :size, :private
     attr_accessor :owner, :name, :description, :open_issues
 
-    # :type defaults to :all if it isn't supplied as an option
+    #TODO use options to handle the optional filter params that github v3 supports
     def find_all(options={})
-      #TODO use options to handle the optional filter params that github v3 supports
       resp = get("/user/repos")
       parse_json(resp.body.to_s).inject([]) do |repos, repo|
         repos << parse_attributes(repo, Repository.new(token))

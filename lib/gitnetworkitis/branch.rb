@@ -1,42 +1,47 @@
 module GitNetworkitis
   class Branch < Base
-    base_uri 'https://github.com/api/v2/json/'
+    base_uri 'https://api.github.com/'
 
-    attr_accessor :name, :id, :owner, :repo
+    attr_accessor :commit, :name, :owner, :repo
 
     #Retrieves all branches based on a specific repo.
     def find_all(options={})
-      if options.has_key?(:owner) & options.has_key?(:repo) 
-        resp = get("/repos/show/#{options[:owner]}/#{options[:repo]}/branches")
-        json_result = parse_json(escape_json(resp.body.to_s))
-        result = Array.new
-        json_result["branches"].each do |branch|
-          result.push Branch.new(self.username, self.token, {:name =>branch[0], :id => branch[1], :owner => options[:owner], :repo => options[:repo]})
+      if options.has_key?(:owner) & options.has_key?(:repo)
+        resp = get("/repos/#{options[:owner]}/#{options[:repo]}/branches")
+        parse_json(escape_json(resp.body.to_s)).inject([]) do |branches, branch|
+          branches << parse_attributes(branch, Branch.new(token, :owner => options[:owner], :repo => options[:repo]))
         end
-        return result
       end
     end
 
+    def commits
+      resp = get("/repos/#{owner}/#{repo}/commits?sha=#{commit['sha']}&per_page=100")
+      parse_json(escape_json(resp.body.to_s)).inject([]) do |commits, commit|
+        commit_attrs = commit['commit'].merge('sha' => commit['sha'], 'parents' => commit['parents'])
+        parsed_commit = parse_attributes(commit_attrs, Commit.new(token))
+        commits << parsed_commit
+      end
+    end
 
     #Loops pages and returns all commits specific to a branch
-    def commits
-      pages = true
-      counter = 0
-      result = Array.new
-      while pages do
-        resp = self.get("/commits/list/#{self.owner}/#{self.repo}/#{self.id}?page=#{counter}")
-        json_result = parse_json(escape_json(resp.body.to_s))
-        if !json_result.has_key?("error")
-          json_result["commits"].each do |commit|
-            temp_commit = parse_attributes(commit, Commit.new(self.username, self.token))
-            result.push temp_commit
-          end
-        else
-          pages = false
-        end
-        counter = counter+1
-      end
-      result
-    end
+    # def commits
+    #   pages = true
+    #   counter = 0
+    #   result = Array.new
+    #   while pages do
+    #     resp = self.get("/repos/#{self.owner}/#{self.repo}/commits?sha=#{commit['sha']}&last_sha=#{commit['sha']}&page=#{counter}")
+    #     parse_json(escape_json(resp.body.to_s)).each do |commit|
+    #       parsed_commit = parse_attributes(commit, Commit.new(token))
+    #       if result.detect {|existing_commit| existing_commit.sha == parsed_commit.sha }
+    #         pages = true
+    #         break
+    #       else
+    #         result << parsed_commit
+    #       end
+    #     end
+    #     counter = counter + 1
+    #   end
+    #   result
+    # end
   end
 end
