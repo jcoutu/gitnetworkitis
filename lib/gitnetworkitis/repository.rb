@@ -7,7 +7,7 @@ module GitNetworkitis
 
     #TODO use options to handle the optional filter params that github v3 supports
     def find_all(options={})
-      resp = get("/user/repos")
+      resp = get("/user/repos", type: (options[:type] || 'all'))
       parse_json(resp.body.to_s).inject([]) do |repos, repo|
         repos << parse_attributes(repo, Repository.new(token))
       end
