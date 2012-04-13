@@ -26,15 +26,15 @@ describe "Gitnetworkitis::Branch" do
         spec_branch_3 = branches.detect {|b| b.name == "spec-branch-3" }
       end
 
-      VCR.use_cassette("spec-branch-1_commits") do
-        commits = spec_branch_1.commits
+      VCR.use_cassette("spec-branch-1_commits", :record => :new_episodes) do
+        commits = spec_branch_1.commits(batch: true, per_page: 15)
         commits.length.should == 43
         commits.first.message.should == "modifies test file so that there's something to commit"
       end
 
-      VCR.use_cassette("spec-branch-2_commits") do
-        commits = spec_branch_2.commits
-        commits.length.should == 42
+      VCR.use_cassette("spec-branch-2_commits", :record => :new_episodes) do
+        commits = spec_branch_2.commits(batch: false, per_page: 15)
+        commits.length.should == 15
         commits.first.message.should == "adds otro test file"
       end
 

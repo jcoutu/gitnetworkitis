@@ -14,8 +14,9 @@ module GitNetworkitis
       end
     end
 
-    def commits
-      resp = get("/repos/#{owner}/#{repo}/commits?sha=#{commit['sha']}&per_page=100")
+    def commits(options={})
+      paging_options = {:per_page => 100, :batch => true}.merge options
+      resp = get("/repos/#{owner}/#{repo}/commits?sha=#{commit['sha']}", paging_options)
       parse_json(escape_json(resp.body.to_s)).inject([]) do |commits, commit|
         commit_attrs = commit['commit'].merge('sha' => commit['sha'], 'parents' => commit['parents'])
         parsed_commit = parse_attributes(commit_attrs, Commit.new(token))
