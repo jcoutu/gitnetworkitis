@@ -17,15 +17,19 @@ describe "Gitnetworkitis::Branch" do
   end
 
   context "#commits" do
-    it "should return an array of commits for the branch" do
-      spec_branch_1, spec_branch_2, spec_branch_3 = nil
+    attr_reader :spec_branch_1, :spec_branch_2, :spec_branch_3
+
+    before :each do
+      @spec_branch_1, @spec_branch_2, @spec_branch_3 = nil
 
       VCR.use_cassette("all_branches") do
-        spec_branch_1 = branches.detect {|b| b.name == "spec-branch-1" }
-        spec_branch_2 = branches.detect {|b| b.name == "spec-branch-2" }
-        spec_branch_3 = branches.detect {|b| b.name == "spec-branch-3" }
+        @spec_branch_1 = branches.detect {|b| b.name == "spec-branch-1" }
+        @spec_branch_2 = branches.detect {|b| b.name == "spec-branch-2" }
+        @spec_branch_3 = branches.detect {|b| b.name == "spec-branch-3" }
       end
+    end
 
+    it "should return an array of commits for the branch" do
       VCR.use_cassette("spec-branch-1_commits", :record => :new_episodes) do
         commits = spec_branch_1.commits(batch: true, per_page: 15)
         commits.length.should == 43
@@ -45,5 +49,15 @@ describe "Gitnetworkitis::Branch" do
       end
     end
 
+    it "should return only commits since a certain SHA if one is specified" do
+      VCR.use_cassette("spec-branch-1_since_sha") do
+        commits = spec_branch_1.commits(since: '8e6f9227f646bfe17d296cf418f2ba5ccdca4b48')
+        commits.length.should == 2
+        commits.first.message.should == "modifies test file so that there's something to commit"
+        commits.last.message.should == "adds test file"
+        commits.map(&:sha).should_not include("8e6f9227f646bfe17d296cf418f2ba5ccdca4b48")
+      end
+    end
   end
+
 end

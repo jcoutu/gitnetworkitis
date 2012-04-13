@@ -18,9 +18,9 @@ module GitNetworkitis
       raise "Unable to parse JSON result" #{e.message}
     end
 
-    # current useful options are :per_page (integer) and :batch (boolean)
+    # current useful options are :per_page (integer), :batch (boolean), and :since (a git SHA)
     def get url, options={}
-      batch = options.delete(:batch)
+      batch = options.key?(:since) ? true : options.delete(:batch)
       query_options = {access_token: token}.merge options
       batch ? batched_get(url, query_options) : single_get(url, query_options)
     end

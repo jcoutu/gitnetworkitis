@@ -15,34 +15,42 @@ module GitNetworkitis
     end
 
     def commits(options={})
-      paging_options = {:per_page => 100, :batch => true}.merge options
-      resp = get("/repos/#{owner}/#{repo}/commits?sha=#{commit['sha']}", paging_options)
-      parse_json(escape_json(resp.body.to_s)).inject([]) do |commits, commit|
+      opts = {:per_page => 100, :batch => true}.merge options
+      opts[:since] ? since_commits(opts) : all_commits(opts)
+    end
+
+    private
+
+    def all_commits(options={})
+      build_commits get("/repos/#{owner}/#{repo}/commits?sha=#{commit['sha']}", options)
+    end
+
+    def since_commits(options={})
+      links = {next: "/repos/#{owner}/#{repo}/commits?sha=#{commit['sha']}"}
+      results = []
+      while links[:next] do
+        resp = single_get(links[:next], options)
+        staged_commits = build_commits resp
+        since_index = staged_commits.find_index {|c| c.sha == options[:since] }
+        if since_index
+          results += staged_commits.first(since_index)
+          # puts staged_commits.first(since_index).map(&:sha).join(', ')
+          links = {}
+        else
+          results << staged_commits
+          links = build_links_from_headers resp.headers['link']
+        end
+      end
+      results
+    end
+
+    def build_commits response
+      parse_json(escape_json(response.body.to_s)).inject([]) do |commits, commit|
         commit_attrs = commit['commit'].merge('sha' => commit['sha'], 'parents' => commit['parents'])
         parsed_commit = parse_attributes(commit_attrs, Commit.new(token))
         commits << parsed_commit
       end
     end
 
-    #Loops pages and returns all commits specific to a branch
-    # def commits
-    #   pages = true
-    #   counter = 0
-    #   result = Array.new
-    #   while pages do
-    #     resp = self.get("/repos/#{self.owner}/#{self.repo}/commits?sha=#{commit['sha']}&last_sha=#{commit['sha']}&page=#{counter}")
-    #     parse_json(escape_json(resp.body.to_s)).each do |commit|
-    #       parsed_commit = parse_attributes(commit, Commit.new(token))
-    #       if result.detect {|existing_commit| existing_commit.sha == parsed_commit.sha }
-    #         pages = true
-    #         break
-    #       else
-    #         result << parsed_commit
-    #       end
-    #     end
-    #     counter = counter + 1
-    #   end
-    #   result
-    # end
   end
 end
