@@ -19,6 +19,7 @@ module GitNetworkitis
       opts[:since] ? since_commits(opts) : all_commits(opts)
     end
 
+
     private
 
     def all_commits(options={})
@@ -34,7 +35,6 @@ module GitNetworkitis
         since_index = staged_commits.find_index {|c| c.sha == options[:since] }
         if since_index
           results += staged_commits.first(since_index)
-          # puts staged_commits.first(since_index).map(&:sha).join(', ')
           links = {}
         else
           results << staged_commits
