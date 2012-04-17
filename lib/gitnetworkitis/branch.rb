@@ -27,12 +27,13 @@ module GitNetworkitis
     end
 
     def since_commits(options={})
+      local_options = scrub_local_options options
       links = {next: "/repos/#{owner}/#{repo}/commits?sha=#{commit['sha']}"}
       results = []
       while links[:next] do
         resp = single_get(links[:next], options)
         staged_commits = build_commits resp
-        since_index = staged_commits.find_index {|c| c.sha == options[:since] }
+        since_index = staged_commits.find_index {|c| c.sha == local_options[:since] }
         if since_index
           results += staged_commits.first(since_index)
           links = {}
@@ -44,7 +45,7 @@ module GitNetworkitis
       results
     end
 
-    def build_commits response
+    def build_commits(response)
       parse_json(escape_json(response.body.to_s)).inject([]) do |commits, commit|
         commit_attrs = commit['commit'].merge('sha' => commit['sha'], 'parents' => commit['parents'])
         parsed_commit = parse_attributes(commit_attrs, Commit.new(token))

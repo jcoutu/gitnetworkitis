@@ -58,6 +58,19 @@ describe "Gitnetworkitis::Branch" do
         commits.map(&:sha).should_not include("8e6f9227f646bfe17d296cf418f2ba5ccdca4b48")
       end
     end
+
+    it "should return only commits since a certain date/time if one is specified" do
+      pending
+      VCR.use_cassette("spec-branch-1_since_date", :record => :all) do
+        commits = spec_branch_1.commits(since: '2012-04-06T14:14:59-07:00')
+        commits.length.should == 3
+        commit_shas = commits.map(&:sha)
+        commit_shas.should include('3d68c13854c8898f8817e2cc60757c41c72ec1de')
+        commit_shas.should include('b1907bcca525cb5fcacaa492b828126d0c8cc91c')
+        commit_shas.should include('8e6f9227f646bfe17d296cf418f2ba5ccdca4b48')
+        commit_shas.should_not include('ce44c956380073a04ef28eee76b4dc0749d4fa6e')
+      end
+    end
   end
 
 end
