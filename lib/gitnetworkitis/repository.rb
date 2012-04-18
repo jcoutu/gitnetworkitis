@@ -1,7 +1,5 @@
 module GitNetworkitis
   class Repository < Base
-    base_uri 'https://api.github.com/'
-
     attr_accessor :watchers, :homepage, :has_downloads, :forks, :url, :has_wiki, :size, :private
     attr_accessor :owner, :name, :description, :open_issues
 

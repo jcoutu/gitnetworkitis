@@ -1,11 +1,16 @@
 require 'httparty'
 require 'json'
 
-# GitNetworkitis stuff
-# By sorting them we ensure that api and base are loaded first on all sane operating systems
-Dir[File.join(File.dirname(__FILE__), "gitnetworkitis/*.rb")].sort.each { |f| require f }
+require 'gitnetworkitis/json_helper'
+require 'gitnetworkitis/base'
+require 'gitnetworkitis/commit'
+require 'gitnetworkitis/repository'
+require 'gitnetworkitis/branch'
+require 'gitnetworkitis/getter'
+require 'gitnetworkitis/commit_getter'
+require 'gitnetworkitis/batch_response'
 
 module GitNetworkitis
 
-  
+
 end

@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
-describe "Gitnetworkitis::Base" do
+describe GitNetworkitis::Base do
   let(:base_class) { GitNetworkitis::Base.new(@token) }
   let(:success_response) { double(:response => double(:code => "200")) }
   let(:failure_response) { double(:response => double(:code => "404")) }
@@ -14,13 +14,13 @@ describe "Gitnetworkitis::Base" do
 
   context "#get" do
     it "should return the response when successful" do
-      base_class.class.should_receive(:get).and_return success_response
+      GitNetworkitis::Getter.should_receive(:get).and_return success_response
       t = base_class.get("http://google.com")
       t.should == success_response
     end
 
     it "should raise an exception when unsuccessful" do
-      base_class.class.should_receive(:get).and_return failure_response
+      GitNetworkitis::Getter.should_receive(:get).and_return failure_response
       lambda { base_class.get("http://google.com") }.should raise_error "Unable to find Github Repository"
     end
 
