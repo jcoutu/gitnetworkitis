@@ -1,14 +1,14 @@
 require 'httparty'
 require 'json'
 
-require 'gitnetworkitis/json_helper'
-require 'gitnetworkitis/base'
-require 'gitnetworkitis/commit'
-require 'gitnetworkitis/repository'
-require 'gitnetworkitis/branch'
-require 'gitnetworkitis/getter'
-require 'gitnetworkitis/commit_getter'
-require 'gitnetworkitis/batch_response'
+['gitnetworkitis/json_helper',
+ 'gitnetworkitis/base',
+ 'gitnetworkitis/commit',
+ 'gitnetworkitis/repository',
+ 'gitnetworkitis/branch',
+ 'gitnetworkitis/getter',
+ 'gitnetworkitis/commit_getter',
+ 'gitnetworkitis/batch_response'].each {|f| require File.join(File.dirname(__FILE__), f) }
 
 module GitNetworkitis
 
