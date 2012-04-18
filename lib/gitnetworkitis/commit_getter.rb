@@ -1,4 +1,5 @@
 module GitNetworkitis
+  #NOTE tested via the Branch specs
   class CommitGetter < Getter
     def get
       if local_options[:since]
@@ -13,38 +14,19 @@ module GitNetworkitis
 
     def since_commits
       since_date = DateTime.parse local_options[:since]
-      since_date_commits
+      batched_since_commits {|c| c.committer['date'] }
     rescue ArgumentError => e
-      since_sha_commits
+      batched_since_commits &:sha
     end
 
-    def since_date_commits
+    def batched_since_commits &block
       links = {next: url}
       results = []
       while links[:next] do
         self.url = links[:next]
         resp = single_get
         staged_commits = build_commits resp
-        since_index = staged_commits.find_index {|c| c.committer['date'] == local_options[:since] }
-        if since_index
-          results += staged_commits.first(since_index)
-          links = {}
-        else
-          results << staged_commits
-          links = build_links_from_headers resp.headers['link']
-        end
-      end
-      results
-    end
-
-    def since_sha_commits
-      links = {next: url}
-      results = []
-      while links[:next] do
-        self.url = links[:next]
-        resp = single_get
-        staged_commits = build_commits resp
-        since_index = staged_commits.find_index {|c| c.sha == local_options[:since] }
+        since_index = staged_commits.find_index {|c| yield(c) == local_options[:since] }
         if since_index
           results += staged_commits.first(since_index)
           links = {}
