@@ -19,7 +19,22 @@ module GitNetworkitis
     end
 
     def since_date_commits
-
+      links = {next: url}
+      results = []
+      while links[:next] do
+        self.url = links[:next]
+        resp = single_get
+        staged_commits = build_commits resp
+        since_index = staged_commits.find_index {|c| c.committer['date'] == local_options[:since] }
+        if since_index
+          results += staged_commits.first(since_index)
+          links = {}
+        else
+          results << staged_commits
+          links = build_links_from_headers resp.headers['link']
+        end
+      end
+      results
     end
 
     def since_sha_commits

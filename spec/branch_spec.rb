@@ -60,8 +60,7 @@ describe "Gitnetworkitis::Branch" do
     end
 
     it "should return only commits since a certain date/time if one is specified" do
-      pending
-      VCR.use_cassette("spec-branch-1_since_date", :record => :all) do
+      VCR.use_cassette("spec-branch-1_since_date") do
         commits = spec_branch_1.commits(since: '2012-04-06T14:14:59-07:00')
         commits.length.should == 3
         commit_shas = commits.map(&:sha)
