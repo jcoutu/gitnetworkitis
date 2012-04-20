@@ -4,14 +4,14 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{gitnetworkitis}
-  s.version = "0.2.0"
+  s.name = "gitnetworkitis"
+  s.version = "0.4.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Julian Coutu"]
-  s.date = %q{2011-05-26}
-  s.description = %q{Git API Gem utilizing the Network API}
-  s.email = %q{jcoutu@phaseiiicreations.com}
+  s.date = "2012-04-20"
+  s.description = "Git API Gem utilizing the Network API"
+  s.email = "jcoutu@phaseiiicreations.com"
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.rdoc"
@@ -26,102 +26,67 @@ Gem::Specification.new do |s|
     "README.rdoc",
     "Rakefile",
     "VERSION",
+    "get_token.rb",
     "gitnetworkitis-0.1.0.gem",
     "gitnetworkitis.gemspec",
     "lib/gitnetworkitis.rb",
     "lib/gitnetworkitis/base.rb",
+    "lib/gitnetworkitis/batch_response.rb",
     "lib/gitnetworkitis/branch.rb",
     "lib/gitnetworkitis/commit.rb",
-    "lib/gitnetworkitis/network_data.rb",
-    "lib/gitnetworkitis/network_meta.rb",
+    "lib/gitnetworkitis/commit_getter.rb",
+    "lib/gitnetworkitis/getter.rb",
+    "lib/gitnetworkitis/json_helper.rb",
     "lib/gitnetworkitis/repository.rb",
     "spec/base_spec.rb",
     "spec/branch_spec.rb",
-    "spec/commit_spec.rb",
+    "spec/getter_spec.rb",
+    "spec/github_config.yml.example",
     "spec/gitnetworkitis_spec.rb",
-    "spec/network_data_spec.rb",
-    "spec/network_meta_spec.rb",
     "spec/repository_spec.rb",
-    "spec/responses/branch_pages/turingstudio_loupe_51ac36280d2dfe16c37b66ef344859c9c714c8e1?page=0.json",
-    "spec/responses/branch_pages/turingstudio_loupe_51ac36280d2dfe16c37b66ef344859c9c714c8e1?page=1.json",
-    "spec/responses/branch_pages/turingstudio_loupe_51ac36280d2dfe16c37b66ef344859c9c714c8e1?page=2.json",
-    "spec/responses/branch_pages/turingstudio_loupe_51ac36280d2dfe16c37b66ef344859c9c714c8e1?page=3.json",
-    "spec/responses/branch_pages/turingstudio_loupe_51ac36280d2dfe16c37b66ef344859c9c714c8e1?page=4.json",
-    "spec/responses/branch_pages/turingstudio_loupe_51ac36280d2dfe16c37b66ef344859c9c714c8e1?page=5.json",
-    "spec/responses/branch_pages/turingstudio_loupe_bec7b23dc57b14d89fa2829e8c32a108a18e7248?page=0.json",
-    "spec/responses/branch_pages/turingstudio_loupe_bec7b23dc57b14d89fa2829e8c32a108a18e7248?page=1.json",
-    "spec/responses/branch_pages/turingstudio_loupe_bec7b23dc57b14d89fa2829e8c32a108a18e7248?page=2.json",
-    "spec/responses/branch_pages/turingstudio_loupe_bec7b23dc57b14d89fa2829e8c32a108a18e7248?page=3.json",
-    "spec/responses/branch_pages/turingstudio_loupe_bec7b23dc57b14d89fa2829e8c32a108a18e7248?page=4.json",
-    "spec/responses/branch_pages/turingstudio_loupe_c3aeb61e37f94bbb67c4f14b52c23b8e54d30d0e?page=0.json",
-    "spec/responses/branch_pages/turingstudio_loupe_c3aeb61e37f94bbb67c4f14b52c23b8e54d30d0e?page=1.json",
-    "spec/responses/branch_pages/turingstudio_loupe_c3aeb61e37f94bbb67c4f14b52c23b8e54d30d0e?page=2.json",
-    "spec/responses/branch_pages/turingstudio_loupe_c3aeb61e37f94bbb67c4f14b52c23b8e54d30d0e?page=3.json",
-    "spec/responses/branch_pages/turingstudio_loupe_c3aeb61e37f94bbb67c4f14b52c23b8e54d30d0e?page=4.json",
-    "spec/responses/girlambition/0-500.json",
-    "spec/responses/girlambition/1002-1502.json",
-    "spec/responses/girlambition/1503-2003.json",
-    "spec/responses/girlambition/2004-2504.json",
-    "spec/responses/girlambition/2505-3005.json",
-    "spec/responses/girlambition/3006-3506.json",
-    "spec/responses/girlambition/3507-4007.json",
-    "spec/responses/girlambition/4008-4508.json",
-    "spec/responses/girlambition/4509-4999.json",
-    "spec/responses/girlambition/501-1001.json",
-    "spec/responses/girlambition/repos_show_turingstudio_website-girlambition_branches.json",
-    "spec/responses/girlambition/turingstudio_website-girlambition_network_meta.json",
-    "spec/responses/loupe/repos_show_turingstudio_loupe.json",
-    "spec/responses/loupe/repos_show_turingstudio_loupe_branches.json",
-    "spec/responses/loupe/turingstudio_loupe_068161e2c05a6b8029a7eb410dd27b1dfa531338?start=1&end=5.json",
-    "spec/responses/loupe/turingstudio_loupe_068161e2c05a6b8029a7eb410dd27b1dfa531338?start=130.json",
-    "spec/responses/loupe/turingstudio_loupe_branch.json",
-    "spec/responses/loupe/turingstudio_loupe_network_data.json",
-    "spec/responses/loupe/turingstudio_loupe_network_meta.json",
-    "spec/responses/repos_show_jcoutu.json",
-    "spec/responses/repos_watched_jcoutu.json",
-    "spec/spec_helper.rb"
+    "spec/spec_helper.rb",
+    "spec/support/vcr_setup.rb",
+    "spec/vcr_cassettes/all_branches.json",
+    "spec/vcr_cassettes/all_repos.json",
+    "spec/vcr_cassettes/bad_creds.json",
+    "spec/vcr_cassettes/find_repo.json",
+    "spec/vcr_cassettes/spec-branch-1_commits.json",
+    "spec/vcr_cassettes/spec-branch-1_since_date.json",
+    "spec/vcr_cassettes/spec-branch-1_since_sha.json",
+    "spec/vcr_cassettes/spec-branch-2_commits.json",
+    "spec/vcr_cassettes/spec-branch-3_commits.json"
   ]
-  s.homepage = %q{http://github.com/jcoutu/gitnetworkitis}
+  s.homepage = "http://github.com/jcoutu/gitnetworkitis"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.5.2}
-  s.summary = %q{Git API Gem utilizing the Network API}
-  s.test_files = [
-    "spec/base_spec.rb",
-    "spec/branch_spec.rb",
-    "spec/commit_spec.rb",
-    "spec/gitnetworkitis_spec.rb",
-    "spec/network_data_spec.rb",
-    "spec/network_meta_spec.rb",
-    "spec/repository_spec.rb",
-    "spec/spec_helper.rb"
-  ]
+  s.rubygems_version = "1.8.15"
+  s.summary = "Git API Gem utilizing the Network API"
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<httparty>, [">= 0"])
-      s.add_development_dependency(%q<rspec>, ["~> 2.1.0"])
-      s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
-      s.add_development_dependency(%q<jeweler>, ["~> 1.5.1"])
-      s.add_development_dependency(%q<rcov>, [">= 0"])
+      s.add_runtime_dependency(%q<httparty>, [">= 0.8.1"])
+      s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
+      s.add_development_dependency(%q<bundler>, [">= 0"])
+      s.add_development_dependency(%q<jeweler>, [">= 0"])
       s.add_development_dependency(%q<fakeweb>, [">= 0"])
+      s.add_development_dependency(%q<vcr>, ["~> 2.0.1"])
     else
-      s.add_dependency(%q<httparty>, [">= 0"])
-      s.add_dependency(%q<rspec>, ["~> 2.1.0"])
-      s.add_dependency(%q<bundler>, ["~> 1.0.0"])
-      s.add_dependency(%q<jeweler>, ["~> 1.5.1"])
-      s.add_dependency(%q<rcov>, [">= 0"])
+      s.add_dependency(%q<httparty>, [">= 0.8.1"])
+      s.add_dependency(%q<rspec>, ["~> 2.8.0"])
+      s.add_dependency(%q<bundler>, [">= 0"])
+      s.add_dependency(%q<jeweler>, [">= 0"])
       s.add_dependency(%q<fakeweb>, [">= 0"])
+      s.add_dependency(%q<vcr>, ["~> 2.0.1"])
     end
   else
-    s.add_dependency(%q<httparty>, [">= 0"])
-    s.add_dependency(%q<rspec>, ["~> 2.1.0"])
-    s.add_dependency(%q<bundler>, ["~> 1.0.0"])
-    s.add_dependency(%q<jeweler>, ["~> 1.5.1"])
-    s.add_dependency(%q<rcov>, [">= 0"])
+    s.add_dependency(%q<httparty>, [">= 0.8.1"])
+    s.add_dependency(%q<rspec>, ["~> 2.8.0"])
+    s.add_dependency(%q<bundler>, [">= 0"])
+    s.add_dependency(%q<jeweler>, [">= 0"])
     s.add_dependency(%q<fakeweb>, [">= 0"])
+    s.add_dependency(%q<vcr>, ["~> 2.0.1"])
   end
 end
 
