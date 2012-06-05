@@ -5,9 +5,23 @@ module GitNetworkitis
 
     #TODO use options to handle the optional filter params that github v3 supports
     def find_all(options={})
+      include_orgs = options.delete(:include_orgs)
       resp = get("/user/repos", type: (options[:type] || 'all'))
-      parse_json(resp.body.to_s).inject([]) do |repos, repo|
+      user_repos = parse_json(resp.body.to_s).inject([]) do |repos, repo|
         repos << parse_attributes(repo, Repository.new(token))
+      end
+
+      include_orgs ? user_repos + org_member_repos : user_repos
+    end
+
+    def org_member_repos
+      resp = get("/user/orgs")
+      org_names = parse_json(resp.body.to_s).map {|o| o['login'] }
+      org_names.inject([]) do |org_repos, org_name|
+        resp = get("/orgs/#{org_name}/repos", type: 'member')
+        org_repos += parse_json(resp.body.to_s).inject([]) do |this_org_repos, repo|
+          this_org_repos << parse_attributes(repo, Repository.new(token))
+        end
       end
     end
 
