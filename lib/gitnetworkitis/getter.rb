@@ -6,7 +6,7 @@ module GitNetworkitis
 
     attr_accessor :url, :local_options, :query_options
 
-    LOCAL_KEYS = [:batch, :since, :branch]
+    LOCAL_KEYS = [:batch, :since]
 
     def initialize(url, options={})
       @url = url
