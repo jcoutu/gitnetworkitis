@@ -8,9 +8,8 @@ describe GitNetworkitis::Getter do
                                           access_token: "token",
                                           per_page: 100,
                                           batch: true,
-                                          branch: 'branch',
                                           since: 'sha')
-      getter.local_options.should == {batch: true, branch: 'branch', since: 'sha'}
+      getter.local_options.should == {batch: true, since: 'sha'}
       getter.query_options.should == {access_token: "token", per_page: 100}
     end
   end
