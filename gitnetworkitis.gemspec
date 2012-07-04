@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "gitnetworkitis"
-  s.version = "0.4.0"
+  s.version = "0.5.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Julian Coutu"]
-  s.date = "2012-04-20"
+  s.date = "2012-07-04"
   s.description = "Git API Gem utilizing the Network API"
   s.email = "jcoutu@phaseiiicreations.com"
   s.extra_rdoc_files = [
